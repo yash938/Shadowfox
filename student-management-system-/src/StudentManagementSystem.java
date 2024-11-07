@@ -234,6 +234,15 @@ public class StudentManagementSystem extends JFrame implements ActionListener {
         }
     }
 
+    private void connectToDatabase() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     private boolean isValidStudentID(String id) {
         return id.matches("^[A-Za-z0-9]+$");
     }
@@ -251,14 +260,7 @@ public class StudentManagementSystem extends JFrame implements ActionListener {
         }
     }
 
-    private void connectToDatabase() {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
-    }
+
 
     private void insertStudentData(String name, String id, String grade, String dob, String gender, String contact, String email) {
         String insertQuery = "INSERT INTO students (student_name, student_id, student_grade, dob, gender, contact, email) VALUES (?, ?, ?, STR_TO_DATE(?, '%d-%m-%Y'), ?, ?, ?)";
