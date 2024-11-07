@@ -285,6 +285,8 @@ public class StudentManagementSystem extends JFrame implements ActionListener {
         }
     }
 
+
+
     private void loadStudentDataFromDatabase() {
         try {
             String selectQuery = "SELECT student_name, student_id, student_grade, DATE_FORMAT(dob, '%d-%m-%Y'), gender, contact, email FROM students";
@@ -308,6 +310,7 @@ public class StudentManagementSystem extends JFrame implements ActionListener {
             e.printStackTrace();
         }
     }
+
     private void deleteStudentData(String studentID) {
         String deleteQuery = "DELETE FROM students WHERE student_id = ?";
         
